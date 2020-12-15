@@ -31,5 +31,11 @@ function buildMetadata(sample) {
   
       PANEL.html("");
       PANEL.append("h6").text(result.location);
+      PANEL.append("h6").text(result.id);
+      PANEL.append("h6").text(result.ethnicity);
+      PANEL.append("h6").text(result.gender);
+      PANEL.append("h6").text(result.age);
+      PANEL.append("h6").text(result.bbtype);
+      PANEL.append("h6").text(result.wfreq);
     });
   }
