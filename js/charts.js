@@ -96,14 +96,41 @@ function buildCharts(sample) {
       orientation:'h'
     };
       
-    // ];
-    // // 9. Create the layout for the bar chart. 
+    
+    // 9. Create the layout for the bar chart. 
     var barLayout = {barmode: 'group'}
-    // };
-    // // 10. Use Plotly to plot the data with the layout. 
+    
+    // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", [barData]);
+
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [{
+      x: yticks_str,
+      y: xticks,
+      text: labels_str,
+      mode: 'markers',
+      marker: {
+        color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
+        size: [40, 60, 80, 100]
+    }
+    }];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: 'Bubble Chart Hover Text',
+      showlegend: false,
+      height: 600,
+      width: 600
+    };
+
+    Plotly.newPlot("bubble",bubbleData,bubbleLayout)
+
+
+
   });
 }
 
 
 optionChanged(940);
+
+
