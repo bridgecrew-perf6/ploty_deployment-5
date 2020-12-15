@@ -55,21 +55,55 @@ function buildCharts(sample) {
     // // 7. Create the yticks for the bar chart.
     // // Hint: Get the the top 10 otu_ids and map them in descending order  
     // //  so the otu_ids with the most bacteria are last. 
-    var yticks = otu_idsArray.sort(function(a,b) {
-      return b - a;
+    var yticks = otu_idsArray.sort(function(a, b) {
+      return parseFloat(b.sample_valuesArray) - parseFloat(a.sample_valuesArray);
     });
 
-    // var yticks = 
+    
+    yticks = yticks.slice(0, 10);
+    yticks = yticks.reverse();
 
-    // // 8. Create the trace for the bar chart. 
-    // var barData = [
+    var xticks = sample_valuesArray.sort(function(a, b) {
+      return parseFloat(b.sample_valuesArray) - parseFloat(a.sample_valuesArray);
+    });
+
+    xticks = xticks.slice(0,10);
+    xticks = xticks.reverse();
+
+    var labels = otu_labelsArray.sort(function(a, b) {
+      return parseFloat(b.sample_valuesArray) - parseFloat(a.sample_valuesArray);
+    });
+
+    labels = labels.slice(0,10);
+    labels = labels.reverse()
+    
+    var yticks_str =[];
+    for (const i in yticks) {
+      yticks_str.push(`OTU ${String(yticks[i])}`);
+    };
+
+    var labels_str = [];
+    for (const i in labels) {
+      labels_str.push(String(labels[i]))
+    };
+    // 8. Create the trace for the bar chart. 
+    var barData = {
+      x: xticks,
+      y: yticks_str,
+      name: "Top 10 Bacteria Cultures Found",
+      text: labels_str,
+      type: "bar",
+      orientation:'h'
+    };
       
     // ];
     // // 9. Create the layout for the bar chart. 
-    // var barLayout = {
-     
+    var barLayout = {barmode: 'group'}
     // };
     // // 10. Use Plotly to plot the data with the layout. 
-    
+    Plotly.newPlot("bar", [barData]);
   });
 }
+
+
+optionChanged(940);
