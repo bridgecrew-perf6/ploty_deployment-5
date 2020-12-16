@@ -1,5 +1,3 @@
-// Plotly.newPlot("plotArea", [{x: [1, 2, 3], y: [10, 20, 30]}]);
-
 function init() {
     var selector = d3.select("#selDataset");
   
@@ -41,20 +39,22 @@ function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
   d3.json("js/samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
-    var samplesData = data.samples; 
+    var samplesData = data.samples;
+    var samplesMeta = data.metadata; 
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-    var filteredArray = samplesData.filter(i => i.id == sample); 
+    var filteredArray = samplesData.filter(i => i.id == sample);
+    var filteredArrayForGauge = samplesMeta.filter(i => i.id == sample)
     //  5. Create a variable that holds the first sample in the array.
     var result = filteredArray[0];
-
+    var resultGauge = filteredArrayForGauge[0]
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var otu_idsArray = result.otu_ids;
     var otu_labelsArray = result.otu_labels;
     var sample_valuesArray = result.sample_values;
-
-    // // 7. Create the yticks for the bar chart.
-    // // Hint: Get the the top 10 otu_ids and map them in descending order  
-    // //  so the otu_ids with the most bacteria are last. 
+    var wfreqGauge = resultGauge.wfreq
+    // 7. Create the yticks for the bar chart.
+    // Hint: Get the the top 10 otu_ids and map them in descending order  
+    //  so the otu_ids with the most bacteria are last. 
     var yticks = otu_idsArray.sort(function(a, b) {
       return parseFloat(b.sample_valuesArray) - parseFloat(a.sample_valuesArray);
     });
@@ -142,9 +142,44 @@ function buildCharts(sample) {
       }
     };
 
-    Plotly.newPlot("bubble",bubbleData,bubbleLayout)
+    Plotly.newPlot("bubble",bubbleData,bubbleLayout);
 
 
+    // collect the wfreq
+    console.log(wfreqGauge);
+
+    // 4. Create the trace for the gauge chart.
+    var gaugeData = [{
+        value: wfreqGauge,
+        title: 'Belly Button Washing Frequency<br>Scrubs per Week',
+        type: 'indicator',
+        mode: "gauge+number",
+        gauge: {
+          axis: { range: [null, 10], tickwidth: 1, tickcolor: "black" },
+          bar: { color: "black"},
+          steps: [
+            { range: [0, 2], color: "red" },
+            { range: [2,4], color: "orange" },
+            { range: [4,6], color: "yellow" },
+            { range: [6,8], color: "lightgreen" },
+            { range: [8,10], color: "green" }
+          ],
+        }
+
+    }
+     
+    ];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout =  { 
+      width: 400, 
+      height: 400, 
+      margin: { t: 25, r: 25, l: 25, b: 25 }, 
+    };
+    
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot("gauge",gaugeData,gaugeLayout);
 
   });
 }
