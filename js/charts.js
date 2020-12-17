@@ -128,7 +128,8 @@ function buildCharts(sample) {
         }).reverse(),
         color: otu_idsArray.sort(function(a, b) {
           return parseFloat(b.sample_valuesArray) - parseFloat(a.sample_valuesArray);
-        }).reverse()
+        }).reverse(),
+        colorscale: 'Earth'
         
     }
     }];
