@@ -88,21 +88,26 @@ function buildCharts(sample) {
     };
     // 8. Create the trace for the bar chart. 
     
-    var barData = {
+    var barData = [{
       x: xticks,
       y: yticks_str,
       name: "Top 10 Bacteria Cultures Found",
       text: labels_str,
       type: "bar",
       orientation:'h'
-    };
+    }];
       
     
     // 9. Create the layout for the bar chart. 
-    var barLayout = {barmode: 'group'}
+    var barLayout = {
+      title: 'Top 10 Bacteria Cultures Found',
+      font:{
+        family: 'Raleway, sans-serif'
+      },
+    };
     
     // 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot("bar", [barData]);
+    Plotly.newPlot("bar", barData, barLayout);
 
     // yticks = yticks.slice(0, 10);
     // 1. Create the trace for the bubble chart.
@@ -146,7 +151,7 @@ function buildCharts(sample) {
 
 
     // collect the wfreq
-    console.log(wfreqGauge);
+    wfreqGauge = parseFloat(wfreqGauge);
 
     // 4. Create the trace for the gauge chart.
     var gaugeData = [{
@@ -155,7 +160,7 @@ function buildCharts(sample) {
         type: 'indicator',
         mode: "gauge+number",
         gauge: {
-          axis: { range: [null, 10], tickwidth: 1, tickcolor: "black" },
+          axis: { range: [null, 10], tickwidth: .5, tickcolor: "black" },
           bar: { color: "black"},
           steps: [
             { range: [0, 2], color: "red" },
