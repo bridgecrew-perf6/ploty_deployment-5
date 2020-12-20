@@ -1,0 +1,8 @@
+.jumbotron {
+    background-image:  url(static/theme.jpg);
+}
+
+body {
+    background-image: url(static/backround.jpg);
+    font-family: Algerian;
+}
