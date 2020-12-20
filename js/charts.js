@@ -148,7 +148,9 @@ function buildCharts(sample) {
       }
     };
 
-    Plotly.newPlot("bubble",bubbleData,bubbleLayout);
+    var config = {responsive: true}
+
+    Plotly.newPlot("bubble",bubbleData,bubbleLayout, config);
 
 
     // collect the wfreq
