@@ -104,6 +104,13 @@ function buildCharts(sample) {
       font:{
         family: 'Raleway, sans-serif'
       },
+      plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(0,0,0,0)',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: 'white'
+      }
     };
     
     // 10. Use Plotly to plot the data with the layout. 
@@ -140,7 +147,14 @@ function buildCharts(sample) {
       showlegend: false,
       height: 500,
       width: 1000,
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: 'white'
+        },
       hovermode: 'closest',
+      plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(0,0,0,0)',
       xaxis: {
         title: {
           text: 'OTU ID',
@@ -182,7 +196,14 @@ function buildCharts(sample) {
     var gaugeLayout =  { 
       width: 400, 
       height: 400, 
-      margin: { t: 25, r: 25, l: 25, b: 25 }, 
+      margin: { t: 25, r: 25, l: 25, b: 25 },
+      plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(0,0,0,0)',
+      font: {
+        family: 'Courier New, monospace',
+        size: 18,
+        color: 'white'
+      }
     };
     
 

@@ -1,5 +1,6 @@
 .jumbotron {
     background-image:  url(static/theme.jpg);
+    color: white;
 }
 
 body {
